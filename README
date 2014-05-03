@@ -1,0 +1,3 @@
+./TurboParser --train --file_train=train.conll --file_model=models/hindi.model --model_type=full --logtostderr
+
+./TurboParser --test --evaluate --file_model=models/hindi.model --file_test=test.conll --file_prediction=hindi.predicted --logtostderr

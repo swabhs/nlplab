@@ -1,3 +1,16 @@
-./TurboParser --train --file_train=train.conll --file_model=models/hindi.model --model_type=full --logtostderr
+# Install TurboParser 
+tar -zxvf TurboParser-2.1.0.tar.gz
+cd TurboParser-2.1.0
 
-./TurboParser --test --evaluate --file_model=models/hindi.model --file_test=test.conll --file_prediction=hindi.predicted --logtostderr
+./install_deps.sh
+./configure && make && make install
+
+mkdir models/
+
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:`pwd;`/deps/local/lib:"
+
+# Training. Use all features(coarse pos, lemma and brown clusters)
+./TurboParser --train --file_train=../train.conll --file_model=models/hindi.model --model_type=full --logtostderr
+
+# Test. Use all features(coarse pos, lemma and brown clusters)
+./TurboParser --test --evaluate --file_model=models/hindi.model --file_test=../test.conll --file_prediction=hindi.predicted --logtostderr
